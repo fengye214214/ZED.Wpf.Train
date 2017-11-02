@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://server.ws.www.hikvision.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="GetDevTreeServiceImplService" targetNamespace="http://server.ws.www.hikvision.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns:tns="http://bean.server.ws.www.hikvision.com" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bean.server.ws.www.hikvision.com">
+      <xsd:complexType name="DevTreeInfoResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="areaList" nillable="true" type="tns:ArrayOfArea" />
+          <xsd:element minOccurs="0" name="deviceNodeList" nillable="true" type="tns:ArrayOfDeviceNode" />
+          <xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="messageCode" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfChannel">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Channel" nillable="true" type="tns:Channel" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Channel">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="channelname" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="channenum" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfArea">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Area" nillable="true" type="tns:Area" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GpsData">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="direction" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="divisionEW" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="divisionNS" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="latitude" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="longitude" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="receiveTime" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="speed" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeviceNode">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="alarmIp" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alarmPort" type="xsd:int" />
+          <xsd:element minOccurs="0" name="channels" nillable="true" type="tns:ArrayOfChannel" />
+          <xsd:element minOccurs="0" name="deviceaccount" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="deviceid" nillable="true" type="xsd:int" />
+          <xsd:element minOccurs="0" name="devicename" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="deviceuse" nillable="true" type="xsd:int" />
+          <xsd:element minOccurs="0" name="haszerochannel" nillable="true" type="xsd:int" />
+          <xsd:element minOccurs="0" name="onlineStatus" nillable="true" type="xsd:int" />
+          <xsd:element minOccurs="0" name="parentNodeId" type="xsd:int" />
+          <xsd:element minOccurs="0" name="phonenum" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="ppvsIp" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="ppvsPort" type="xsd:int" />
+          <xsd:element minOccurs="0" name="reservedStr" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="rsmIp" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="rsmPort" type="xsd:int" />
+          <xsd:element minOccurs="0" name="serverroute" nillable="true" type="xsd:int" />
+          <xsd:element minOccurs="0" name="streamtype" nillable="true" type="xsd:int" />
+          <xsd:element minOccurs="0" name="streamusertype" type="xsd:int" />
+          <xsd:element minOccurs="0" name="transmitmode" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfDeviceNode">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="DeviceNode" nillable="true" type="tns:DeviceNode" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Area">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="areaId" type="xsd:int" />
+          <xsd:element minOccurs="0" name="areaName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="parentAreaId" type="xsd:int" />
+          <xsd:element minOccurs="0" name="type" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeviceGpsStatus">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="deviceAccount" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="deviceStatus" type="xsd:int" />
+          <xsd:element minOccurs="0" name="gpsData" nillable="true" type="tns:GpsData" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns:ns0="http://bean.server.ws.www.hikvision.com" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://server.ws.www.hikvision.com/">
+      <xsd:import namespace="http://bean.server.ws.www.hikvision.com" />
+      <xsd:element name="getDevTreeInfo" type="tns:getDevTreeInfo" />
+      <xsd:complexType name="getDevTreeInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="username" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string" />
+          <xsd:element name="route" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getDevTreeInfoResponse" type="tns:getDevTreeInfoResponse" />
+      <xsd:complexType name="getDevTreeInfoResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="getDevTreeInfoResult" type="ns0:DevTreeInfoResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getDevGpsStatus" type="tns:getDevGpsStatus" />
+      <xsd:complexType name="getDevGpsStatus">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="deviceAccount" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getDevGpsStatusResponse" type="tns:getDevGpsStatusResponse" />
+      <xsd:complexType name="getDevGpsStatusResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="getDeviceGpsStatusResult" type="ns0:DeviceGpsStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getDevGpsStatus">
+    <wsdl:part name="parameters" element="tns:getDevGpsStatus" />
+  </wsdl:message>
+  <wsdl:message name="getDevGpsStatusResponse">
+    <wsdl:part name="parameters" element="tns:getDevGpsStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDevTreeInfoResponse">
+    <wsdl:part name="parameters" element="tns:getDevTreeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDevTreeInfo">
+    <wsdl:part name="parameters" element="tns:getDevTreeInfo" />
+  </wsdl:message>
+  <wsdl:portType name="IGetDevTreeService">
+    <wsdl:operation name="getDevTreeInfo">
+      <wsdl:input name="getDevTreeInfo" message="tns:getDevTreeInfo" />
+      <wsdl:output name="getDevTreeInfoResponse" message="tns:getDevTreeInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDevGpsStatus">
+      <wsdl:input name="getDevGpsStatus" message="tns:getDevGpsStatus" />
+      <wsdl:output name="getDevGpsStatusResponse" message="tns:getDevGpsStatusResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetDevTreeServiceImplServiceSoapBinding" type="tns:IGetDevTreeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getDevTreeInfo">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getDevTreeInfo">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDevTreeInfoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDevGpsStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getDevGpsStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDevGpsStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetDevTreeServiceImplService">
+    <wsdl:port name="GetDevTreeServiceImplPort" binding="tns:GetDevTreeServiceImplServiceSoapBinding">
+      <soap:address location="http://115.159.23.193/services/GetDevTreeService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
