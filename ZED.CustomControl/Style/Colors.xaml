@@ -4,6 +4,14 @@
     <!--Window样式-->
     <!--等待窗口阴影样式-->
     <DropShadowEffect x:Key="waitingWinBoxShadow" BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+     
+    <!--基本窗体样式-->
+    <!--窗体背景色-->
+    <SolidColorBrush x:Key="WindowBaseBackground" Color="Transparent"/>
+    <!--窗体边框-->
+    <SolidColorBrush x:Key="WindowBaseBorder" Color="#FF0562A9"/>
+    <!--窗体边框阴影-->
+    <DropShadowEffect x:Key="WindowDropShadow" BlurRadius="8" ShadowDepth="0" Direction="0" Opacity="0.7" />
 
     <!--Region 文字图片-->
     <!--文字图片字体颜色-->

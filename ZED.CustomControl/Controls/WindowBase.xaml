@@ -1,0 +1,76 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
+                    xmlns:local="clr-namespace:ZED.CustomControl">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!--WindowsBase默认样式-->
+    <Style x:Key="DefaultWindowBaseStyle" TargetType="{x:Type local:WindowBase}">
+        <Setter Property="Background" Value="{StaticResource WindowBaseBackground}"/>
+        <Setter Property="Width" Value="480"/>
+        <Setter Property="Height" Value="320"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="ResizeMode" Value="CanResize"/>
+        <Setter Property="BorderBrush" Value="{StaticResource WindowBaseBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <!--标题栏图标-->
+        <Setter Property="FIcon" Value="&#xe601;"/>
+        <Setter Property="FIconSize" Value="30"/>
+        <!--标题栏背景-->
+        <Setter Property="CaptionBackground" Value="{StaticResource WindowBaseBorder}"/>
+        <!--标题栏高度-->
+        <Setter Property="CaptionHeight" Value="25"/>
+        <!--标题栏图片和文字颜色-->
+        <Setter Property="CaptionForeground" Value="White"/>
+        <!--窗体内边框圆角-->
+        <Setter Property="local:ControlAttachProperty.CornerRadius" Value="2"></Setter>
+        <!--窗体基本设置-->
+        <Setter Property="shell:WindowChrome.WindowChrome">
+            <Setter.Value>
+                <shell:WindowChrome  CaptionHeight="{Binding Path=CaptionHeight,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:WindowBase}}}" 
+                                     ResizeBorderThickness="8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:WindowBase}">
+                    <Grid>
+                        <!--窗体边框-->
+                        <Border Margin="0" BorderThickness="{TemplateBinding BorderThickness}"   Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" Effect="{StaticResource waitingWinBoxShadow}" 
+                                CornerRadius="{TemplateBinding local:ControlAttachProperty.CornerRadius}"    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        </Border>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="25" Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!--标题-->
+                            <Border Grid.Row="0" Background="{TemplateBinding CaptionBackground}" >
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel x:Name="PART_Header" Height="{TemplateBinding CaptionHeight}" Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{TemplateBinding FIcon}" Foreground="{TemplateBinding CaptionForeground}" FontSize="{Binding FIconSize}" Style="{StaticResource FIcon}"></TextBlock>
+                                        <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" FontSize="{TemplateBinding HeaderFontSize}" Foreground="{TemplateBinding CaptionForeground}" Text="{TemplateBinding Title}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <!--窗体区域内容-->
+                            <AdornerDecorator Grid.Row="1" Margin="1,0,1,1">
+                                <ContentPresenter Content="{TemplateBinding Content}" />
+                            </AdornerDecorator>
+                        </Grid>
+                        
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
