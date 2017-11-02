@@ -1,14 +1,15 @@
-﻿<customcontrol:WindowBase
+﻿<zed:WindowBase
     x:Class="ZED.Wpf.Train.TestWinBase"
-    xmlns:customcontrol="clr-namespace:ZED.CustomControl;assembly=ZED.CustomControl"
+    xmlns:zed="clr-namespace:ZED.CustomControl;assembly=ZED.CustomControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZED.Wpf.Train"
+        
         mc:Ignorable="d"
         Title="TestWinBase" Height="300" Width="300">
     <Grid>
         <TextBox>ce</TextBox>
     </Grid>
-</customcontrol:WindowBase>
+</zed:WindowBase>

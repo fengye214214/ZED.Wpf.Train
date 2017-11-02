@@ -40,7 +40,7 @@
                     <Grid>
                         <!--窗体边框-->
                         <Border Margin="0" BorderThickness="{TemplateBinding BorderThickness}"   Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" Effect="{StaticResource waitingWinBoxShadow}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" Effect="{StaticResource WindowDropShadow}" 
                                 CornerRadius="{TemplateBinding local:ControlAttachProperty.CornerRadius}"    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         </Border>
                         <Grid>

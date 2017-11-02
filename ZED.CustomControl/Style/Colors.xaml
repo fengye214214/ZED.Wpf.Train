@@ -11,7 +11,7 @@
     <!--窗体边框-->
     <SolidColorBrush x:Key="WindowBaseBorder" Color="#FF0562A9"/>
     <!--窗体边框阴影-->
-    <DropShadowEffect x:Key="WindowDropShadow" BlurRadius="8" ShadowDepth="0" Direction="0" Opacity="0.7" />
+    <DropShadowEffect x:Key="WindowDropShadow" BlurRadius="24" Color="#FF858484" Direction="90" ShadowDepth="3"/>
 
     <!--Region 文字图片-->
     <!--文字图片字体颜色-->
