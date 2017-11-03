@@ -76,7 +76,6 @@
     <Compile Include="Pages\Button_Page.xaml.cs">
       <DependentUpon>Button_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SysLangueViewModel.cs" />
     <Compile Include="TestWinBase.xaml.cs">
       <DependentUpon>TestWinBase.xaml</DependentUpon>
     </Compile>
