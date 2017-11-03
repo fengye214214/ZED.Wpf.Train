@@ -76,7 +76,7 @@
     <Compile Include="Pages\Button_Page.xaml.cs">
       <DependentUpon>Button_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestWinBase.xaml.cs">
+    <Compile Include="Pages\TestWinBase.xaml.cs">
       <DependentUpon>TestWinBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\IVMSTreeListViewModel.cs" />
@@ -109,7 +109,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TestWinBase.xaml">
+    <Page Include="Pages\TestWinBase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

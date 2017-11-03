@@ -57,6 +57,7 @@ namespace ZED.Wpf.Train
         private void btn_winBase_Click(object sender, RoutedEventArgs e)
         {
             var winBase = new TestWinBase();
+            winBase.Owner = ComControlHelper.GetTopWindow();
             winBase.Show();
         }
     }

@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:ZED.Wpf.Train"
         
         mc:Ignorable="d"
-        Title="TestWinBase" Height="300" Width="300">
+        Title="TestWinBase" Height="300" Width="500">
     <Grid>
-        <TextBox>ce</TextBox>
+        <TextBlock>我是自定义的窗体</TextBlock>
     </Grid>
 </zed:WindowBase>
