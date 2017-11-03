@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell, Version=6.0.147.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -60,8 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ComControlHelper.cs" />
+    <Compile Include="Common\ControlAttachProperty.cs" />
     <Compile Include="Controls\WaitingWinBox.xaml.cs">
       <DependentUpon>WaitingWinBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WindowBase.xaml.cs">
+      <DependentUpon>WindowBase.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\BackUpExDateTimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +121,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\WindowBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ImgButton.xaml.cs">
@@ -142,6 +155,7 @@
     <Resource Include="Resource\FontImage\iconfont.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Lib\Microsoft.Windows.Shell.dll" />
     <Content Include="Lib\WPFToolkit.dll" />
     <Content Include="Lib\WPFVisifire.Charts.dll" />
     <Content Include="Lib\Xceed.Wpf.Toolkit.dll" />

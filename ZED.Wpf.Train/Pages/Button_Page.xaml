@@ -25,6 +25,7 @@
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <zed:ImgButton x:Name="btn_wait" FIcon="&#xe65f;" Background="Black" MouseOverBackground="#333333" Margin="5 0 0 0" IsAnimation="True" Click="btn_wait_Click">等待窗体</zed:ImgButton>
                 <zed:ImgButton x:Name="btn_wait1" FIcon="&#xe65f;" Margin="5 0 0 0" IsAnimation="True" Click="btn_wait1_Click">等待窗体多提示</zed:ImgButton>
+                <zed:ImgButton x:Name="btn_winBase"  FIcon="&#xe648;" Margin="2,0,5,0" Click="btn_winBase_Click">自定义窗体</zed:ImgButton>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <zed:ExDateTimePicker Margin="5 0 0 0"  Width="160" Height="30"/>

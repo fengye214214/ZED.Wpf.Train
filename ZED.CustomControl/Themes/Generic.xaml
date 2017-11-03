@@ -6,6 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Styles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ImgButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ExDateTimePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/WindowBase.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--<Style TargetType="{x:Type local:CustomControl1}">
         <Setter Property="Template">

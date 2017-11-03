@@ -16,9 +16,9 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="5">
             <TextBlock VerticalAlignment="Center">用户名</TextBlock>
-            <x1:WatermarkTextBox x:Name="txt_userName" Watermark="用户名" Width="120" Margin="10 0 0 0" Text=""></x1:WatermarkTextBox>
+            <x1:WatermarkTextBox x:Name="txt_userName" Watermark="用户名" Width="120" Margin="10 0 0 0" ></x1:WatermarkTextBox>
             <TextBlock VerticalAlignment="Center" Width="50" Margin="10 0 0 0" >密码</TextBlock>
-            <x1:WatermarkPasswordBox x:Name="txt_pwd" Watermark="密码" Width="120" Password=""></x1:WatermarkPasswordBox>
+            <x1:WatermarkPasswordBox x:Name="txt_pwd" Watermark="密码" Width="120" ></x1:WatermarkPasswordBox>
             <zed:ImgButton Margin="10 0 0 0" FIcon="&#xe628;" MouseOverFIconForeground="Yellow" CornerRadius="5" Click="ImgButton_Click">查找</zed:ImgButton>
         </StackPanel>
         <GroupBox Grid.Row="1" Header="组织机构" MinWidth="250" HorizontalAlignment="Left">

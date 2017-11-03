@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,6 +37,9 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\ZED.CustomControl\Lib\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -73,7 +76,10 @@
     <Compile Include="Pages\Button_Page.xaml.cs">
       <DependentUpon>Button_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\SysLangueViewModel.cs" />
+    <Compile Include="SysLangueViewModel.cs" />
+    <Compile Include="TestWinBase.xaml.cs">
+      <DependentUpon>TestWinBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\IVMSTreeListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="Language\EN_US.xaml">
@@ -101,6 +107,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Language\ZH_CN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestWinBase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
