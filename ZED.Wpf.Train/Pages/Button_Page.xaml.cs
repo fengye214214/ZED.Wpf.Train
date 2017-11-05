@@ -60,5 +60,12 @@ namespace ZED.Wpf.Train
             winBase.Owner = ComControlHelper.GetTopWindow();
             winBase.Show();
         }
+
+        private void btn_msg_Click_1(object sender, RoutedEventArgs e)
+        {
+            var winMsg = new MessageBoxEx();
+            winMsg.Owner = ComControlHelper.GetTopWindow();
+            winMsg.ShowDialog();
+        }
     }
 }

@@ -32,6 +32,9 @@
                 <zed:ExDateTimePicker Margin="5 0 0 0" IsTextEmpty="False" IsStartTime="True" Width="160" Height="30" FIcon="323"/>
                 <zed:ExDateTimePicker Margin="5 0 0 0" IsTextEmpty="False" IsEndTime="True" Width="160" Height="30" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <zed:ImgButton x:Name="btn_msg" FIcon="&#xe65f;" Margin="5 0 0 0" Click="btn_msg_Click_1">消息提示窗口</zed:ImgButton>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

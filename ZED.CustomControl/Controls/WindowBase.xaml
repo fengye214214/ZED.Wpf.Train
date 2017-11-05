@@ -38,7 +38,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:WindowBase}">
-                    <Grid Margin="4"> <!--Margin="4"是为了让窗体看起来有阴影边框-->
+                    <Grid Margin="4">
+                        <!--Margin="4"是为了让窗体看起来有阴影边框-->
                         <!--窗体边框-->
                         <Border Margin="0" BorderThickness="{TemplateBinding BorderThickness}"   Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" Effect="{StaticResource WindowDropShadow}" 
@@ -62,11 +63,16 @@
                                     </StackPanel>
                                     <StackPanel x:Name="PART_HeaderClose" Grid.Column="1" Height="{TemplateBinding CaptionHeight}" Orientation="Horizontal" VerticalAlignment="Center">
 
-                                        <local:ImgButton x:Name="btn_min" FIcon="&#xe60d;" ToolTip="最小化" FIconSize="10" Foreground="{TemplateBinding CaptionForeground}" Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
-                                        <local:ImgButton x:Name="btn_max" FIcon="&#xe62b;" FIconSize="10" Foreground="{TemplateBinding CaptionForeground}"  Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
-                                        <local:ImgButton x:Name="btn_close" FIcon="&#xe60a;" ToolTip="关闭" IsAnimation="True" Foreground="{TemplateBinding CaptionForeground}" MouseOverBackground="Red" FIconSize="10" Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
+                                        <local:ImgButton x:Name="btn_min" FIcon="&#xe60d;" ToolTip="最小化" FIconSize="10" Foreground="{TemplateBinding CaptionForeground}" Style="{StaticResource ImgButtonOnlyShowImage}" 
+                                                         Command="{Binding Path=MinimizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
+                                        <local:ImgButton x:Name="btn_max" FIcon="&#xe62b;" FIconSize="10" Foreground="{TemplateBinding CaptionForeground}"  Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center" 
+                                                         Command="{Binding Path=MaximizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
+                                        <local:ImgButton x:Name="btn_close" FIcon="&#xe60a;" ToolTip="关闭" IsAnimation="True" Foreground="{TemplateBinding CaptionForeground}" 
+                                                         MouseOverBackground="Red" FIconSize="10" Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center"
+                                                          Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                                                         Command="{Binding Path=CloseWindowCommand,RelativeSource={RelativeSource TemplatedParent}}"></local:ImgButton>
 
-                
+
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -76,6 +82,16 @@
                             </AdornerDecorator>
                         </Grid>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="FIcon" TargetName="btn_max" Value="&#xe62b;"></Setter>
+                            <Setter Property="ToolTip" TargetName="btn_max" Value="向下还原"></Setter>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter Property="FIcon" TargetName="btn_max" Value="&#xe65b;"></Setter>
+                            <Setter Property="ToolTip" TargetName="btn_max" Value="最大化"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

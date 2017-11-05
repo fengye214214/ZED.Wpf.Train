@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Common\ComControlHelper.cs" />
     <Compile Include="Common\ControlAttachProperty.cs" />
+    <Compile Include="Common\ControlExtension.cs" />
     <Compile Include="Controls\WaitingWinBox.xaml.cs">
       <DependentUpon>WaitingWinBox.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ImgButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageBoxEx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +134,9 @@
   <ItemGroup>
     <Compile Include="Controls\ImgButton.xaml.cs">
       <DependentUpon>ImgButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageBoxEx.xaml.cs">
+      <DependentUpon>MessageBoxEx.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

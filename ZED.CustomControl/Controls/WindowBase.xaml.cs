@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ZED.CustomControl
 {
@@ -107,6 +100,21 @@ namespace ZED.CustomControl
 
         #endregion
 
+        #region 命令定义
+        /// <summary>
+        /// 关闭命令
+        /// </summary>
+        public ICommand CloseWindowCommand { get; protected set; }
+        /// <summary>
+        /// 最小化命令
+        /// </summary>
+        public ICommand MinimizeWindowCommand { get; protected set; }
+        /// <summary>
+        /// 最大化命令
+        /// </summary>
+        public ICommand MaximizeWindowCommand { get; protected set; }
+        #endregion
+
 
         public WindowBase()
         {
@@ -116,6 +124,35 @@ namespace ZED.CustomControl
             this.MaxHeight = SystemParameters.WorkArea.Height + 10;
             this.Style = this.FindResource("DefaultWindowBaseStyle") as Style;
             this.Title = "基本窗体";
+            this.CloseWindowCommand = new RoutedUICommand();
+            this.BindCommand(CloseWindowCommand, this.Close_Execute);
+            this.MinimizeWindowCommand = new RoutedUICommand();
+            this.BindCommand(MinimizeWindowCommand, this.Min_Execute);
+            this.MaximizeWindowCommand = new RoutedUICommand();
+            this.BindCommand(MaximizeWindowCommand, this.Max_Execute);
+        }
+
+        private void Max_Execute(object arg1, ExecutedRoutedEventArgs arg2)
+        {
+            this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            arg2.Handled = true;
+        }
+
+        private void Min_Execute(object arg1, ExecutedRoutedEventArgs arg2)
+        {
+            this.WindowState = WindowState.Minimized;
+            arg2.Handled = true;
+        }
+
+        private void Close_Execute(object arg1, ExecutedRoutedEventArgs arg2)
+        {
+            this.Close();
+        }
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            this.DragMove();
         }
     }
 }
