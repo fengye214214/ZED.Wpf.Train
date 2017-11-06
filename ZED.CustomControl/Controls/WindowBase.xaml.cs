@@ -88,15 +88,36 @@ namespace ZED.CustomControl
 
         #endregion
 
+        #region  标题栏高度
         public double CaptionHeight
         {
             get { return (double)GetValue(CaptionHeightProperty); }
             set { SetValue(CaptionHeightProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for CaptionHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CaptionHeightProperty =
             DependencyProperty.Register("CaptionHeight", typeof(double), typeof(WindowBase), new PropertyMetadata(15D));
+        #endregion
+
+        #region 最小化按钮是否显示
+        public Visibility MinButtonVisibility
+        {
+            get { return (Visibility)GetValue(MinButtonVisibilityProperty); }
+            set { SetValue(MinButtonVisibilityProperty, value); }
+        }
+        public static readonly DependencyProperty MinButtonVisibilityProperty =
+            DependencyProperty.Register("MinButtonVisibility", typeof(Visibility), typeof(WindowBase), new PropertyMetadata(Visibility.Visible));
+        #endregion
+
+        #region 最大化按钮是否显示
+        public Visibility MaxButtonVisibility
+        {
+            get { return (Visibility)GetValue(MaxButtonVisibilityProperty); }
+            set { SetValue(MaxButtonVisibilityProperty, value); }
+        }
+        public static readonly DependencyProperty MaxButtonVisibilityProperty =
+            DependencyProperty.Register("MaxButtonVisibility", typeof(Visibility), typeof(WindowBase), new PropertyMetadata(Visibility.Visible));
+        #endregion
+
 
         #endregion
 

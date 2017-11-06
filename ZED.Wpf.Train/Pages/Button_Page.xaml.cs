@@ -63,9 +63,12 @@ namespace ZED.Wpf.Train
 
         private void btn_msg_Click_1(object sender, RoutedEventArgs e)
         {
-            var winMsg = new MessageBoxEx();
-            winMsg.Owner = ComControlHelper.GetTopWindow();
-            winMsg.ShowDialog();
+            MessageBoxEx.ShowInfo("我是提示信息！");
+        }
+
+        private void btn_war_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxEx.ShowWarn("我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！");
         }
     }
 }

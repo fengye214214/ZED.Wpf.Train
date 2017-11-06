@@ -7,7 +7,7 @@
      
     <!--基本窗体样式-->
     <!--窗体背景色-->
-    <SolidColorBrush x:Key="WindowBaseBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="WindowBaseBackground" Color="White"/>
     <!--窗体边框-->
     <SolidColorBrush x:Key="WindowBaseBorder" Color="#FF0562A9"/>
     <!--窗体边框阴影-->
