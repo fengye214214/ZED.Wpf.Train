@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="txt_msg" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Center" TextWrapping="Wrap">df df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfd df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfd df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfd df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfddf df dfd</TextBlock>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5"  HorizontalAlignment="Center">
-            <zed:ImgButton x:Name="btn_ok"  FIcon="&#xe646;" Width="80" Margin="5">确认</zed:ImgButton>
-            <zed:ImgButton x:Name="btn_cancel" FIcon="&#xe644;" Width="80" Margin="5" Click="btn_cancel_Click">取消</zed:ImgButton>
+            <zed:ImgButton x:Name="btn_ok"  FIcon="&#xe646;" Width="80" Margin="5" Click="btn_ok_Click">确认</zed:ImgButton>
+            <zed:ImgButton x:Name="btn_cancel" FIcon="&#xe644;" Width="80" Margin="5" Visibility="Collapsed" Click="btn_cancel_Click">取消</zed:ImgButton>
         </StackPanel>
     </Grid>
 </local:WindowBase>

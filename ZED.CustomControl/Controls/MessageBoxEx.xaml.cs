@@ -19,6 +19,8 @@ namespace ZED.CustomControl
     /// </summary>
     public partial class MessageBoxEx : WindowBase
     {
+        public bool DialogResultEx { get; private set; }
+
         public MessageBoxEx()
         {
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace ZED.CustomControl
                     break;
                 case NotifyTypeEnum.Question:
                     this.FIcon = "\ue60e";
+                    this.btn_cancel.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -48,6 +51,13 @@ namespace ZED.CustomControl
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResultEx = false;
+            this.Close();
+        }
+
+        private void btn_ok_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResultEx = true;
             this.Close();
         }
 
@@ -71,14 +81,36 @@ namespace ZED.CustomControl
             Show(NotifyTypeEnum.Warning, msg, owner);
         }
 
+        /// <summary>
+        /// 显示错误
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="owner"></param>
+        public static void ShowError(string msg, Window owner = null)
+        {
+            Show(NotifyTypeEnum.Error, msg, owner);
+        }
+
+        /// <summary>
+        /// 显示询问
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="owner"></param>
+        public static bool ShowQuestion(string msg, Window owner = null)
+        {
+            return Show(NotifyTypeEnum.Question, msg, owner);
+        }
+
         private static bool Show(NotifyTypeEnum type, string msg, Window owner = null)
         {
             var result = true;
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => 
+            //此处不能用BeginInvoke异步执行
+            Application.Current.Dispatcher.Invoke(new Action(() => 
             {
                 var winMsg = new MessageBoxEx(type, msg);
                 winMsg.Owner = owner ?? ComControlHelper.GetTopWindow();
                 winMsg.ShowDialog();
+                result = winMsg.DialogResultEx;
             }));
             return result;
         }

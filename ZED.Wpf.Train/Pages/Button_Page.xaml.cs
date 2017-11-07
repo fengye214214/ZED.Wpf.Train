@@ -70,5 +70,23 @@ namespace ZED.Wpf.Train
         {
             MessageBoxEx.ShowWarn("我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！我是警告信息！");
         }
+
+        private void btn_error_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxEx.ShowError("我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，我是错误，");
+        }
+
+        private void btn_question_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBoxEx.ShowQuestion("确认删除？");
+            if (result)
+            {
+                MessageBox.Show("true");
+            }
+            else
+            {
+                MessageBox.Show("false");
+            }
+        }
     }
 }
