@@ -39,6 +39,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Utility, Version=3.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\System.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +77,8 @@
     <Compile Include="Controls\WindowBase.xaml.cs">
       <DependentUpon>WindowBase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\SystemConverter.cs" />
+    <Compile Include="Tools\Singleton.cs" />
     <Page Include="Controls\BackUpExDateTimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\Microsoft.Windows.Shell.dll" />
+    <Content Include="Lib\System.Utility.dll" />
     <Content Include="Lib\WPFToolkit.dll" />
     <Content Include="Lib\WPFVisifire.Charts.dll" />
     <Content Include="Lib\Xceed.Wpf.Toolkit.dll" />

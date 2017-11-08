@@ -50,8 +50,8 @@
                                 <RowDefinition MinHeight="25" Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!--标题-->
-                            <Border Grid.Row="0" Background="{TemplateBinding CaptionBackground}" >
+                            <!--标题 此处的Margin是为了边框-->
+                            <Border Grid.Row="0" Margin="1 1 1 0" Background="{TemplateBinding CaptionBackground}" >
                                 <Grid >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>

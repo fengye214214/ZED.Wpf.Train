@@ -34,9 +34,13 @@ namespace ZED.CustomControl
                     this.FIcon = "\ue659";
                     break;
                 case NotifyTypeEnum.Error:
+                    this.BorderBrush = Brushes.Red;
+                    this.CaptionForeground = Brushes.Red;
                     this.FIcon = "\ue644";
                     break;
                 case NotifyTypeEnum.Warning:
+                    this.BorderBrush = new SolidColorBrush(Color.FromRgb(202, 81, 0));
+                    this.CaptionForeground = new SolidColorBrush(Color.FromRgb(202, 81, 0));
                     this.FIcon = "\ue60b";
                     break;
                 case NotifyTypeEnum.Question:
@@ -108,6 +112,7 @@ namespace ZED.CustomControl
             Application.Current.Dispatcher.Invoke(new Action(() => 
             {
                 var winMsg = new MessageBoxEx(type, msg);
+                winMsg.Title = type.GetDescription();
                 winMsg.Owner = owner ?? ComControlHelper.GetTopWindow();
                 winMsg.ShowDialog();
                 result = winMsg.DialogResultEx;
