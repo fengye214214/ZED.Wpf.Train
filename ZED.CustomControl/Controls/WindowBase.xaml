@@ -64,9 +64,13 @@
                                     <StackPanel x:Name="PART_HeaderClose" Grid.Column="1" Height="{TemplateBinding CaptionHeight}" Orientation="Horizontal" VerticalAlignment="Center">
 
                                         <local:ImgButton x:Name="btn_min" FIcon="&#xe60d;" ToolTip="最小化" FIconSize="10" Foreground="{TemplateBinding CaptionForeground}" Style="{StaticResource ImgButtonOnlyShowImage}" 
-                                                         Command="{Binding Path=MinimizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding MinButtonVisibility}" VerticalAlignment="Center" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
+                                                         Command="{Binding Path=MinimizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}"
+                                                         Visibility="{Binding Path=MinButtonVisibility,RelativeSource={RelativeSource TemplatedParent},Converter={x:Static local:SystemConverter.BooleanToVisibilityConverter}}" 
+                                                         VerticalAlignment="Center" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
                                         <local:ImgButton x:Name="btn_max" FIcon="&#xe62b;" FIconSize="10" Foreground="{TemplateBinding CaptionForeground}"  Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center" 
-                                                         Command="{Binding Path=MaximizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding MaxButtonVisibility}" Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
+                                                         Command="{Binding Path=MaximizeWindowCommand,RelativeSource={RelativeSource TemplatedParent}}" 
+                                                         Visibility="{Binding Path=MaxButtonVisibility,RelativeSource={RelativeSource TemplatedParent},Converter={x:Static local:SystemConverter.BooleanToVisibilityConverter}}" 
+                                                         Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"></local:ImgButton>
                                         <local:ImgButton x:Name="btn_close" FIcon="&#xe60a;" ToolTip="关闭" IsAnimation="True" Foreground="{TemplateBinding CaptionForeground}" 
                                                          MouseOverBackground="Red" FIconSize="10" Style="{StaticResource ImgButtonOnlyShowImage}" VerticalAlignment="Center"
                                                           Cursor="Hand" shell:WindowChrome.IsHitTestVisibleInChrome="True"

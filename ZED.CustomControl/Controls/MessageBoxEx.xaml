@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZED.CustomControl"
         xmlns:zed="clr-namespace:ZED.CustomControl"
-        mc:Ignorable="d" SizeToContent="WidthAndHeight" MinButtonVisibility="Collapsed" MaxButtonVisibility="Collapsed"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" MinButtonVisibility="False" MaxButtonVisibility="False"
         Title="提示" FIcon="&#xe608;" ShowInTaskbar="False" ResizeMode="NoResize"  MinHeight="150" MinWidth="300" MaxWidth="600">
     <Grid>
         <Grid.RowDefinitions>

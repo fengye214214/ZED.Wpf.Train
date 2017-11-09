@@ -8,6 +8,8 @@
                 <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="./Language/ZH_CN.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--<Style TargetType="TextBox" BasedOn="{StaticResource TextBoxDefaultStyle}"></Style>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

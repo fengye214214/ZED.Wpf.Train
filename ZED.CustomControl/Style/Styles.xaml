@@ -6,5 +6,6 @@
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Global.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Themes/TextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

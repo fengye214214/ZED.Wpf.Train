@@ -99,23 +99,23 @@ namespace ZED.CustomControl
         #endregion
 
         #region 最小化按钮是否显示
-        public Visibility MinButtonVisibility
+        public bool MinButtonVisibility
         {
-            get { return (Visibility)GetValue(MinButtonVisibilityProperty); }
+            get { return (bool)GetValue(MinButtonVisibilityProperty); }
             set { SetValue(MinButtonVisibilityProperty, value); }
         }
         public static readonly DependencyProperty MinButtonVisibilityProperty =
-            DependencyProperty.Register("MinButtonVisibility", typeof(Visibility), typeof(WindowBase), new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("MinButtonVisibility", typeof(bool), typeof(WindowBase), new PropertyMetadata(true));
         #endregion
 
         #region 最大化按钮是否显示
-        public Visibility MaxButtonVisibility
+        public bool MaxButtonVisibility
         {
-            get { return (Visibility)GetValue(MaxButtonVisibilityProperty); }
+            get { return (bool)GetValue(MaxButtonVisibilityProperty); }
             set { SetValue(MaxButtonVisibilityProperty, value); }
         }
         public static readonly DependencyProperty MaxButtonVisibilityProperty =
-            DependencyProperty.Register("MaxButtonVisibility", typeof(Visibility), typeof(WindowBase), new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("MaxButtonVisibility", typeof(bool), typeof(WindowBase), new PropertyMetadata(true));
         #endregion
 
 
