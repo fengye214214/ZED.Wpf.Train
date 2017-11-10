@@ -79,6 +79,9 @@
       <DependentUpon>WindowBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\SystemConverter.cs" />
+    <Compile Include="Controls\TextBoxWatermark.xaml.cs">
+      <DependentUpon>TextBoxWatermark.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Singleton.cs" />
     <Page Include="Controls\BackUpExDateTimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Themes\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TextBoxWatermark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

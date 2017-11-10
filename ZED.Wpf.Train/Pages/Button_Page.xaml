@@ -40,8 +40,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBox x:Name="txt_base" Width="100" Margin="3,3,0,0" >dvcv</TextBox>
-                <TextBox Margin="5 0 0 0" Width="150" Style="{StaticResource WatermarkTextBoxDefaultStyle}" zed:ControlAttachProperty.Watermark="我是水印"></TextBox>
-
+                <zed:TextBoxWatermark Margin="3,3,0,0" Width="150" Watermark="我是水印" ></zed:TextBoxWatermark>
+                <zed:TextBoxWatermark Margin="3,3,0,0" Width="150" Height="25" AttButtonType="OpenFilePathDialog" Watermark="打开文件路径..."></zed:TextBoxWatermark>
             </StackPanel>
         </StackPanel>
     </Grid>

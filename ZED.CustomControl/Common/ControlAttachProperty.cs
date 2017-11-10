@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace ZED.CustomControl
 {
@@ -24,19 +25,20 @@ namespace ZED.CustomControl
             DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ControlAttachProperty), new PropertyMetadata(null));
         #endregion
 
-        #region 水印
-        public static string GetWatermark(DependencyObject obj)
+        #region 附加组件模板
+        public static ControlTemplate GetAttachContent(DependencyObject obj)
         {
-            return (string)obj.GetValue(WatermarkProperty);
+            return (ControlTemplate)obj.GetValue(AttachContentProperty);
         }
 
-        public static void SetWatermark(DependencyObject obj, string value)
+        public static void SetAttachContent(DependencyObject obj, ControlTemplate value)
         {
-            obj.SetValue(WatermarkProperty, value);
+            obj.SetValue(AttachContentProperty, value);
         }
 
-        public static readonly DependencyProperty WatermarkProperty =
-            DependencyProperty.RegisterAttached("Watermark", typeof(string), typeof(ControlAttachProperty), new PropertyMetadata(""));
+        // Using a DependencyProperty as the backing store for AttachContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AttachContentProperty =
+            DependencyProperty.RegisterAttached("AttachContent", typeof(ControlTemplate), typeof(ControlAttachProperty), new PropertyMetadata(null));
         #endregion
     }
 }
