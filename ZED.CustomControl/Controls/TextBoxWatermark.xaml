@@ -50,6 +50,14 @@
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}">
                             <Setter TargetName="Message" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+                        <!--鼠标进入边框颜色-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#679CC2"/>
+                        </Trigger>
+                        <!--文本框获取焦点颜色-->
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  Property="BorderBrush" Value="#2F71A4"/>
+                        </Trigger>
                         <!--禁用-->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
@@ -82,7 +90,7 @@
                 <ControlTemplate>
                     <Border BorderThickness="0 1 1 1" BorderBrush="{Binding Path=BorderBrush,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:TextBoxWatermark}}}">
                         <local:ImgButton Grid.Column="1" FIcon="&#xe64e;" Height="{TemplateBinding Height}" Style="{StaticResource ImgButtonOnlyShowImage}"
-                                              Command="{Binding Path=ClearTextCommand,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:TextBoxWatermark}}}"></local:ImgButton>
+                                              Command="{Binding Path=OpenFilePathCommand,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:TextBoxWatermark}}}"></local:ImgButton>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

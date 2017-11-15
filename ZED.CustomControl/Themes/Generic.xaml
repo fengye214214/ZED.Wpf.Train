@@ -8,6 +8,8 @@
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ExDateTimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/WindowBase.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/TextBoxWatermark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ExComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ImgToggleButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--<Style TargetType="{x:Type local:CustomControl1}">
         <Setter Property="Template">

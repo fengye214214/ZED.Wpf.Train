@@ -12,17 +12,20 @@ namespace ZED.Train.Common
         /// 是否成功
         /// </summary>
         public bool success { get; set; }
-
         /// <summary>
         /// 返回的消息
         /// </summary>
         public string message { get; set; }
-
         /// <summary>
         /// 返回的数据
         /// </summary>
         public T data { get; set; }
 
+        /// <summary>
+        /// 创建响应参数
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static ResponseCmd<T> CreateResponseCmd(string data)
         {
             Newtonsoft.Json.JsonSerializerSettings setting = new Newtonsoft.Json.JsonSerializerSettings();

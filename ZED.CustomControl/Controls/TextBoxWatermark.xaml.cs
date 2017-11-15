@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,7 @@ namespace ZED.CustomControl
         private static void att_changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as TextBoxWatermark;
+            
             if (e.NewValue != null)
             {
                 AttratchButton ab = (AttratchButton)(Convert.ToInt32(e.NewValue));
@@ -67,6 +69,10 @@ namespace ZED.CustomControl
         /// 清除输入框Text事件命令
         /// </summary>
         public ICommand ClearTextCommand { get; protected set; }
+        /// <summary>
+        ///打开文件夹路径命名 
+        /// </summary>
+        public ICommand OpenFilePathCommand { get; protected set; }
         #endregion
 
         #region 构造函数
@@ -78,6 +84,36 @@ namespace ZED.CustomControl
         {
             this.ClearTextCommand = new RoutedUICommand();
             this.BindCommand(ClearTextCommand, this.Clear_Execute);
+            this.OpenFilePathCommand = new RoutedUICommand();
+            this.BindCommand(OpenFilePathCommand, this.OpenFilePath_Execute);
+        }
+        #endregion
+
+        #region 打开文件路径
+        private void OpenFilePath_Execute(object arg1, ExecutedRoutedEventArgs arg2)
+        {
+            var element = arg2.Source as FrameworkElement;
+            if (element == null)
+            {
+                return;
+            }
+            var txt = element as TextBoxWatermark;
+            string filter = txt.Tag == null ? "所有文件(*.*)|*.*" : txt.Tag.ToString();
+            if (filter.Contains(".bin"))
+            {
+                filter += "|所有文件(*.*)|*.*";
+            }
+            if (txt == null) return;
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Title = "请选择文件";
+            //“图像文件(*.bmp, *.jpg)|*.bmp;*.jpg|所有文件(*.*)|*.*”
+            fd.Filter = filter;
+            fd.FileName = txt.Text.Trim();
+            if (fd.ShowDialog() == true)
+            {
+                txt.Text = fd.FileName;
+            }
+            element.Focus();
         }
         #endregion
 
@@ -89,12 +125,10 @@ namespace ZED.CustomControl
             {
                 return;
             }
-            if ((element as TextBox) != null)
+            if ((element as TextBoxWatermark) != null)
             {
-                (element as TextBox).Clear();
+                (element as TextBoxWatermark).Clear();
             }
-
-            
         }
         #endregion
     }

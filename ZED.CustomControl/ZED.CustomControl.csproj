@@ -82,7 +82,13 @@
     <Compile Include="Controls\TextBoxWatermark.xaml.cs">
       <DependentUpon>TextBoxWatermark.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ExComboBox.xaml.cs">
+      <DependentUpon>ExComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Singleton.cs" />
+    <Compile Include="Controls\ImgToggleButton.xaml.cs">
+      <DependentUpon>ImgToggleButton.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\BackUpExDateTimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -96,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MessageBoxEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ExComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\WindowBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImgToggleButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

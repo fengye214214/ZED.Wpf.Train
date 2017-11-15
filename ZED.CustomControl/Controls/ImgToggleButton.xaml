@@ -1,14 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:ZED.CustomControl">
-
+                    xmlns:local="clr-namespace:ZED.CustomControl"
+                    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Global.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
-    
+
     <!--Region 默认模板-->
-    <ControlTemplate x:Key="ImgButtonDefaultTemplate" TargetType="{x:Type local:ImgButton}">
+    <ControlTemplate x:Key="ImgToggleButtonDefaultTemplate" TargetType="{x:Type local:ImgToggleButton}">
         <!--按钮样式-->
         <Border x:Name="Bd" Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path= Background}" 
                                     Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height}" 
@@ -66,9 +67,9 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <!--EndRegion-->
-    
+
     <!--Region 默认样式-->
-    <Style x:Key="ImgButtonDefaultStyle" TargetType="{x:Type local:ImgButton}">
+    <Style x:Key="ImgToggleButtonDefaultStyle" TargetType="{x:Type local:ImgToggleButton}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Height" Value="30"/>
@@ -79,12 +80,12 @@
         <Setter Property="Background" Value="{StaticResource ButtonCornerRadiusBG}"/>
         <Setter Property="MouseOverBackground" Value="{StaticResource ButtonCornerRadiusMouseOverBG}"/>
         <Setter Property="CornerRadius" Value="0"/>
-        <Setter Property="Template" Value="{StaticResource ImgButtonDefaultTemplate}"/>
+        <Setter Property="Template" Value="{StaticResource ImgToggleButtonDefaultTemplate}"/>
     </Style>
     <!--EndRegion-->
 
     <!--Region 只显示图片的样式-->
-    <Style x:Key="ImgButtonOnlyShowImage" TargetType="{x:Type local:ImgButton}">
+    <Style x:Key="ImgToggleButtonOnlyShowImage" TargetType="{x:Type local:ImgToggleButton}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Height" Value="30"/>
@@ -95,12 +96,11 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="MouseOverBackground" Value="{StaticResource ButtonCornerRadiusMouseOverBG}"/>
         <Setter Property="CornerRadius" Value="0"/>
-        <Setter Property="Template" Value="{StaticResource ImgButtonDefaultTemplate}"/>
+        <Setter Property="Template" Value="{StaticResource ImgToggleButtonDefaultTemplate}"/>
     </Style>
     <!--Endregion-->
 
 
     <!--默认样式-->
-    <Style TargetType="{x:Type local:ImgButton}" BasedOn="{StaticResource ImgButtonDefaultStyle}"/>
-
+    <Style TargetType="{x:Type local:ImgToggleButton}" BasedOn="{StaticResource ImgToggleButtonDefaultStyle}"/>
 </ResourceDictionary>

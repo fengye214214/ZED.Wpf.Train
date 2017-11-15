@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:x1="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:zed="clr-namespace:ZED.CustomControl;assembly=ZED.CustomControl"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" KeepAlive="True"
       d:DesignHeight="300" d:DesignWidth="500"
 	Title="IVMS_Page">
 
