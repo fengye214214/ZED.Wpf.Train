@@ -3,8 +3,9 @@
                     xmlns:local="clr-namespace:ZED.CustomControl">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Colors.xaml" />-->
+        <!--<ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />-->
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Global.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <!--Region 默认模板-->

@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:ZED.CustomControl">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Styles.xaml" />
+        
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ImgButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ExDateTimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/WindowBase.xaml" />

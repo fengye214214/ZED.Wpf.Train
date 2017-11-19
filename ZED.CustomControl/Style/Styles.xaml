@@ -1,11 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Colors.xaml" />
-
-        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Colors.xaml" />-->
+        <!--<ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/FIcon.xaml" />-->
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Global.xaml" />
+        
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ImgButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Style/Themes/TextBox.xaml" />
+
+
+        <!--<ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ImgButton.xaml" />-->
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ExDateTimePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/WindowBase.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/TextBoxWatermark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ExComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ZED.CustomControl;component/Controls/ImgToggleButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -6,7 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
     
     <!--FIcon-->
-    <Style x:Key="FIcon" TargetType="TextBlock">
+    <Style x:Key="FIcon" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="/ZED.CustomControl;component/Resource/FontImage/#SF2015"></Setter>
         <Setter Property="Foreground" Value="{StaticResource TextForeground}"/>
         <Setter Property="TextAlignment" Value="Center"/>
