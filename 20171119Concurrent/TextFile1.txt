@@ -1,1 +1,3 @@
 ﻿Parallel Programming with Microsoft.NET
+Introduction to Rx
+Guide to Inplementing Custom TPL Dataflow Blocks

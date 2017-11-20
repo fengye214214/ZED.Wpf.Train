@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace _20171119Concurrent
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -88,6 +90,101 @@ namespace _20171119Concurrent
         IEnumerable<bool> PrimalityTest(IEnumerable<int> values)
         {
             return values.AsParallel().Select(x => x % 2 == 0);
+        }
+
+        public void TestExtensionReactive()
+        {
+            Observable.Interval(TimeSpan.FromSeconds(1))
+                .Timestamp()
+                .Where(x => x.Value % 2 == 0)
+                .Select(x => x.Timestamp)
+                .Subscribe(c => Trace.WriteLine(c));
+
+           
+        }
+
+        private async void btn_n4_Click(object sender, RoutedEventArgs e)
+        {
+            var res = await DelayResult<int>(2, TimeSpan.FromSeconds(3));
+            MessageBox.Show("2");
+        }
+
+        static async Task<T> DelayResult<T>(T result, TimeSpan delay)
+        {
+            await Task.Delay(delay);
+            return result;
+        }
+
+        static async Task<String> DownloadStringWithRetries(string url)
+        {
+            using (var client = new HttpClient())
+            {
+                var nextDaly = TimeSpan.FromSeconds(1);
+                for (int i = 0; i != 3; ++i)
+                {
+                    try
+                    {
+                        return await client.GetStringAsync(url);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    await Task.Delay(nextDaly);
+                    nextDaly = nextDaly + nextDaly;
+                }
+                return await client.GetStringAsync(url);
+            }
+        }
+
+        static async Task<string> DownloadStringWithTimeout(string url)
+        {
+            using (var client = new HttpClient())
+            {
+                var downloadTask = client.GetStringAsync(url);
+                var timeoutTask = Task.Delay(3000);
+                var conpletedTask = await Task.WhenAny(downloadTask, timeoutTask);
+                if(conpletedTask == timeoutTask)
+                {
+                    return null;
+                }
+                return await downloadTask;
+            }
+        }
+
+        static Task<T> NotImplementedAsync<T>()
+        {
+            var tcs = new TaskCompletionSource<T>();
+            tcs.SetException(new NotImplementedException());
+            return tcs.Task;
+        }
+
+        static void MyMethod(IProgress<double> progress = null)
+        {
+            bool done = false;
+            double percentConplete = 0;
+            while (!done)
+            {
+                //....
+
+                if (progress != null)
+                {
+                    progress.Report(percentConplete);
+                }
+            }
+        }
+    }
+
+    interface IMyAsyncInterface
+    {
+        Task<int> GetValueAsync();
+    }
+
+    class MyAsyncImplement : IMyAsyncInterface
+    {
+        public Task<int> GetValueAsync()
+        {
+            return Task.FromResult(13);
         }
     }
 }

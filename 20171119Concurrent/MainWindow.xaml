@@ -18,6 +18,7 @@
             <Button x:Name="btn_n1" Click="btn_n1_ClickAsync" >1.2节</Button>
             <Button x:Name="btn_n2" Click="btn_n2_Click">1.2节</Button>
             <Button x:Name="btn_n3" Click="btn_n3_Click">1.2节</Button>
+            <Button x:Name="btn_n4" Click="btn_n4_Click" Content="2.1节日"/>
         </WrapPanel>
     </Grid>
 </Window>
