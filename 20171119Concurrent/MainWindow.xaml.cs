@@ -159,19 +159,201 @@ namespace _20171119Concurrent
             return tcs.Task;
         }
 
-        static void MyMethod(IProgress<double> progress = null)
+         async Task MyMethod(IProgress<double> progress = null)
         {
             bool done = false;
             double percentConplete = 0;
             while (!done)
             {
                 //....
-
+                await Task.Delay(TimeSpan.FromSeconds(3));
+                percentConplete += 5;
                 if (progress != null)
                 {
                     progress.Report(percentConplete);
                 }
             }
+        }
+
+         async Task CallMyMethod()
+        {
+            var progress = new Progress<double>();
+            progress.ProgressChanged += (e, s) => 
+            {
+                //MessageBox.Show("ok");
+                btn_n5.Content = progress.ToString();
+                Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            };
+            await MyMethod(progress);
+        }
+
+        private async void btn_n5_Click(object sender, RoutedEventArgs e)
+        {
+            await CallMyMethod();
+        }
+
+        private async Task<String> DownloadAllAsync(IEnumerable<string> urls)
+        {
+            var httpClient = new HttpClient();
+            //定义每一个url的使用方法
+            //注意到这里序列还没有开始求值，所以所有任务都还没有真正启动
+            var downloads = urls.Select(url => httpClient.GetStringAsync(url));
+            //所有任务开始执行
+            Task<string>[] downloadTasks = downloads.ToArray();
+            //用异步的方式等待所有下载完成
+            string[] htmlPages = await Task.WhenAll(downloadTasks);
+            return string.Concat(htmlPages);
+
+        }
+
+        static async Task ThrowNotImplementedExceptionAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        static async Task ThrowInvalidOperationExceptionAsync()
+        {
+            throw new InvalidOperationException();
+        }
+
+        static async Task ObserveOneExceptionAsync()
+        {
+            var task1 = ThrowNotImplementedExceptionAsync();
+            var task2 = ThrowInvalidOperationExceptionAsync();
+
+            try
+            {
+                await Task.WhenAll(task1, task2);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        static async Task ObserveAllExceptionAsync()
+        {
+            var task1 = ThrowNotImplementedExceptionAsync();
+            var task2 = ThrowInvalidOperationExceptionAsync();
+            Task allTasks = Task.WhenAll(task1, task2);
+            try
+            {
+                await allTasks;
+            }
+            catch (Exception)
+            {
+                AggregateException allException = allTasks.Exception;
+            }
+        }
+
+        private async Task TestWhenAll()
+        {
+            Task t1 = Task.Delay(TimeSpan.FromSeconds(1));
+            Task t2 = Task.Delay(TimeSpan.FromSeconds(2));
+            Task t3 = Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.WhenAll(t1, t2, t3);
+        }
+
+        private static async Task<int> FirstRespondingUrlAsync(string urlA, string urlB)
+        {
+            var httpClient = new HttpClient();
+            //并发的下载两个任务
+            Task<byte[]> downloadTaskA = httpClient.GetByteArrayAsync(urlA);
+            Task<byte[]> downloadTaskB = httpClient.GetByteArrayAsync(urlB);
+            //等待任意一个任务完成
+            Task<byte[]> completedTask =
+                await Task.WhenAny(downloadTaskA, downloadTaskB);
+            byte[] data = await completedTask;
+            return data.Length;
+        }
+
+        private async void btn_n6_Click(object sender, RoutedEventArgs e)
+        {
+            await ProcessTasksAsync1();
+        }
+
+        async Task ProcessTasksAsync()
+        {
+            Task<int> tasl1 = DelayAndReturnAsync(2);
+            Task<int> task2 = DelayAndReturnAsync(3);
+            Task<int> task3 = DelayAndReturnAsync(1);
+            var tasks = new[] { tasl1, task2, task3};
+            foreach (var item in tasks)
+            {
+                var result = await item;
+                btn_n6.Content = result.ToString();
+                Trace.WriteLine(result);
+            }
+        }
+
+        async Task AwaitAndProcessAsync(Task<int> task)
+        {
+            var result = await task;
+            btn_n6.Content = result.ToString();
+            Trace.WriteLine(result);
+        }
+
+        async Task ProcessTasksAsync1()
+        {
+            Task<int> tasl1 = DelayAndReturnAsync(2);
+            Task<int> task2 = DelayAndReturnAsync(3);
+            Task<int> task3 = DelayAndReturnAsync(1);
+            var tasks = new[] { tasl1, task2, task3 };
+
+            //var processingTask = (from t in tasks
+            //                      select AwaitAndProcessAsync(t)).ToArray();
+
+
+            var processingTask = tasks.Select(async t => 
+            {
+                var result = await t;
+                Trace.WriteLine(result);
+            }).ToArray();
+
+            await Task.WhenAll(processingTask);
+        }
+
+        async Task<int> DelayAndReturnAsync(int val)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(val));
+            return val;
+        }
+
+        async Task ResumeOnContextAsync()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+        }
+
+        async Task ResumeWithoutContextAsync()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(true);
+            btn_n7.Content = "test Context";
+        }
+
+        private async void btn_7_Click(object sender, RoutedEventArgs e)
+        {
+            await ResumeWithoutContextAsync();
+        }
+    }
+
+    sealed class MyAsyncCommand : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Execute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task Executes(object parameter)
+        {
+
         }
     }
 

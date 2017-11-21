@@ -19,6 +19,9 @@
             <Button x:Name="btn_n2" Click="btn_n2_Click">1.2节</Button>
             <Button x:Name="btn_n3" Click="btn_n3_Click">1.2节</Button>
             <Button x:Name="btn_n4" Click="btn_n4_Click" Content="2.1节日"/>
+            <Button x:Name="btn_n5" Click="btn_n5_Click" Content="进度"/>
+            <Button x:Name="btn_n6" Click="btn_n6_Click" Content="任务完成时处理"/>
+            <Button x:Name="btn_n7" Click="btn_7_Click" Content="测试上下文"/>
         </WrapPanel>
     </Grid>
 </Window>
