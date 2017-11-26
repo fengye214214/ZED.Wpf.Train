@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -354,6 +356,128 @@ namespace _20171119Concurrent
         public async Task Executes(object parameter)
         {
 
+        }
+
+        void RoatrMatrics(IEnumerable<Matrix> matrices, float degrees)
+        {
+            Parallel.ForEach(matrices, x => x.Rotate(degrees));
+        }
+
+        void InverMatrices(IEnumerable<Matrix> matrics)
+        {
+            Parallel.ForEach(matrics, (x, y) => 
+            {
+                if(!x.IsIdentity)
+                {
+                    y.Stop();
+                }
+                else
+                {
+                    x.Invert();
+                }
+            });
+        }
+
+        void RoateMatricesToken(IEnumerable<Matrix> matrices, float degrees, CancellationToken token)
+        {
+            Parallel.ForEach(matrices,
+                new ParallelOptions { CancellationToken = token},
+                x => x.Rotate(degrees));
+        }
+
+        void InvertMatrices(IEnumerable<Matrix> martices)
+        {
+            object mutex = new object();
+            int nonInvertibleCount = 0;
+            Parallel.ForEach(martices, x => 
+            {
+                if(x.IsIdentity)
+                {
+                    x.Invert();
+                }
+                else
+                {
+                    lock(mutex)
+                    {
+                        nonInvertibleCount++;
+                    }
+                }
+            });
+        }
+
+        static int ParallelSum(IEnumerable<int> values)
+        {
+            return values.AsParallel().Aggregate(
+                seed: 0,
+                func:(sum, item) => sum + item);
+        }
+
+        static int ParallelSum1(IEnumerable<int> values)
+        {
+            return values.AsParallel().Sum();
+        }
+
+        static int ParallelSum2(IEnumerable<int> values)
+        {
+            object mutex = new object();
+            int result = 0;
+            Parallel.ForEach(source:values,
+                localInit: () => 0,
+                body: (item, state, localValue) => localValue + item,
+                localFinally:localValue => 
+                {
+                    lock(mutex)
+                    {
+                        result += localValue;
+                    }
+                });
+            return result;
+        }
+
+        static void DoAction20Times(Action action)
+        {
+            Action[] actions = Enumerable.Repeat(action, 20).ToArray();
+            Parallel.Invoke(actions);
+        }
+
+        static void DoAction20TimesOne(Action action, CancellationToken token)
+        {
+            Action[] actions = Enumerable.Repeat(action, 20).ToArray();
+            Parallel.Invoke(new ParallelOptions { CancellationToken = token }, actions);
+        }
+
+        static IEnumerable<int> MultiplyBy2(IEnumerable<int> values)
+        {
+            return values.AsParallel().AsOrdered().Select(x => x * 2);
+        }
+
+        static int ParallelSumOneEx(IEnumerable<int> values)
+        {
+            return values.AsParallel().Sum();
+        }
+
+        static async void TPL1()
+        {
+            var multiplyBlock = new TransformBlock<int, int>(item => item * 2);
+            var subtractBlock = new TransformBlock<int, int>(item => item - 2);
+
+            var options = new DataflowLinkOptions { PropagateCompletion = true };
+            multiplyBlock.LinkTo(subtractBlock);
+
+            multiplyBlock.Complete();
+            await subtractBlock.Completion;
+        }
+
+        static void TPL2()
+        {
+            var block = new TransformBlock<int, int>(x1 =>
+            {
+                if (x1 == 1)
+                    throw new InvalidOperationException("Blech.");
+                return x1 * 2;
+            });
+            block.Post(1);
+            block.Post(2);
         }
     }
 
