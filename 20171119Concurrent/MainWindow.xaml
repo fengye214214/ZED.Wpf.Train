@@ -22,6 +22,7 @@
             <Button x:Name="btn_n5" Click="btn_n5_Click" Content="进度"/>
             <Button x:Name="btn_n6" Click="btn_n6_Click" Content="任务完成时处理"/>
             <Button x:Name="btn_n7" Click="btn_7_Click" Content="测试上下文"/>
+            <Button x:Name="btn_n8" Click="btn_n8_Click" Content="测试Rex"/>
         </WrapPanel>
     </Grid>
 </Window>

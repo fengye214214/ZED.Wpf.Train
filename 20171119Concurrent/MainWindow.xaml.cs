@@ -29,11 +29,48 @@ namespace _20171119Concurrent
         public MainWindow()
         {
             InitializeComponent();
+            EventTrans();
         }
+
+        public void EventTrans()
+        {
+            var progress = new Progress<int>();
+            var progressReport = Observable.FromEventPattern<int>(
+                handler => progress.ProgressChanged += handler,
+                handler => progress.ProgressChanged -= handler);
+            progressReport.Subscribe(x1 => Trace.WriteLine("OnNext: " + x1.EventArgs));
+        }
+
+        public void EventTime()
+        {
+            var timer = new System.Timers.Timer(interval: 1000) { Enabled = true };
+        }
+
+
+        public async Task TranferError()
+        {
+            try
+            {
+                var block = new TransformBlock<int, int>(item =>
+                {
+                    if (item == 1)
+                        throw new InvalidOperationException("Blech.");
+                    return item * 2;
+                });
+                block.Post(1);
+                await block.Completion;
+            }catch(InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
 
         private async void btn_n1_ClickAsync(object sender, RoutedEventArgs e)
         {
-            await DoSomethingAsync();
+            //await DoSomethingAsync();
+            //await TranferError();
         }
 
         async Task DoSomethingAsync()
@@ -336,6 +373,19 @@ namespace _20171119Concurrent
         private async void btn_7_Click(object sender, RoutedEventArgs e)
         {
             await ResumeWithoutContextAsync();
+        }
+
+        private void btn_n8_Click(object sender, RoutedEventArgs e)
+        {
+            var uiContext = SynchronizationContext.Current;
+            Trace.WriteLine("UI thread is " + Environment.CurrentManagedThreadId);
+            Observable.Interval(TimeSpan.FromSeconds(1))
+                .ObserveOn(uiContext)
+                .Subscribe(x12 => 
+                {
+                    btn_n8.Content = "news";
+                    Trace.WriteLine("Interval" + x12 + "on thread" + Environment.CurrentManagedThreadId);
+                });
         }
     }
 
