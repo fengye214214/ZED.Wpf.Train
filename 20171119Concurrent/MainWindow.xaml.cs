@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
@@ -387,6 +389,13 @@ namespace _20171119Concurrent
                     Trace.WriteLine("Interval" + x12 + "on thread" + Environment.CurrentManagedThreadId);
                 });
         }
+
+        private void btn_n9_Click(object sender, RoutedEventArgs e)
+        {
+            Observable.Interval(TimeSpan.FromSeconds(1))
+                .Buffer(2)
+                .Subscribe(x => Trace.WriteLine(DateTime.Now.Second + ": Got " + x[0] + " and " + x[1]));
+        }
     }
 
     sealed class MyAsyncCommand : ICommand
@@ -529,6 +538,22 @@ namespace _20171119Concurrent
             block.Post(1);
             block.Post(2);
         }
+
+        private void ImmuteList()
+        {
+            var stack = ImmutableStack<int>.Empty;
+            var queue = ImmutableQueue<int>.Empty;
+            var list = ImmutableList<int>.Empty;
+        }
+
+        async Task<PingReply> PingAsync(string hostNameOrAddress, CancellationToken cancellationToken)
+        {
+            var ping = new Ping();
+            using (cancellationToken.Register(() => ping.SendAsyncCancel()))
+            {
+                return await ping.SendPingAsync(hostNameOrAddress);
+            }
+        }
     }
 
     interface IMyAsyncInterface
@@ -542,5 +567,115 @@ namespace _20171119Concurrent
         {
             return Task.FromResult(13);
         }
+    }
+
+    public interface IHttpService
+    {
+        IObservable<string> GetString(string url);
+    }
+
+    public class MyTimeoutClass
+    {
+        private readonly IHttpService _httpService;
+
+
+        public MyTimeoutClass(IHttpService httpService)
+        {
+            _httpService = httpService;
+        }
+
+        public IObservable<string> GetStringWithTimeout(string url)
+        {
+            return _httpService.GetString(url)
+                .Timeout(TimeSpan.FromSeconds(1));
+        }
+    }
+
+    interface IMyAsyncInterfaceOne
+    {
+        Task<int> CountBytesAsync(string url);
+    }
+
+    class MyAsyncOne : IMyAsyncInterfaceOne
+    {
+        public async Task<int> CountBytesAsync(string url)
+        {
+            var client = new HttpClient();
+            var bytes = await client.GetByteArrayAsync(url);
+            return bytes.Length;
+        }
+
+        static async Task UseMyInterfaceAsync(IMyAsyncInterfaceOne service)
+        {
+            var result = await service.CountBytesAsync("http://www.baidu.com");
+            Trace.WriteLine(result);
+        }
+    }
+
+    class MyAsyncTow : IMyAsyncInterfaceOne
+    {
+        public Task<int> CountBytesAsync(string url)
+        {
+            return Task.FromResult(13);
+        }
+    }
+
+    class MyAsyncClassThree
+    {
+        private MyAsyncClassThree()
+        {
+        }
+
+        private async Task<MyAsyncClassThree> InitializeAsync()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            return this;
+        }
+
+        public static Task<MyAsyncClassThree> CreateAsync()
+        {
+            var result = new MyAsyncClassThree();
+            return result.InitializeAsync();
+        }
+    }
+
+    public interface IAsyncInitialization
+    {
+        Task Initialization { get; }
+    }
+
+    public interface IMyFundamentalType
+    {
+
+    }
+
+    class MyFundamentalType : IAsyncInitialization
+    {   
+        public MyFundamentalType()
+        {
+            Initialization = InitializeAsync();
+        }
+
+        private async Task InitializeAsync()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+        }
+
+        public Task Initialization { get; private set; }
+    }
+
+    public static class AsyncInitialization
+    {
+        static Task WhenAllInitializedAsync(params object[] instances)
+        {
+            return Task.WhenAll(instances
+                .OfType<IAsyncInitialization>()
+                .Select(x => x.Initialization));
+        }
+    }
+
+    public class MyEventArgs : EventArgs
+    {
+
     }
 }
