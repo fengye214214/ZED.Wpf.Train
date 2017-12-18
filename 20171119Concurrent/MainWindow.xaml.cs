@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nito.AsyncEx;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -31,7 +32,17 @@ namespace _20171119Concurrent
         public MainWindow()
         {
             InitializeComponent();
-            EventTrans();
+        }
+
+        async Task MyMethodAsync()
+        {
+            int val = 10;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            val += 1;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            val = val - 5;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            Trace.WriteLine(val);
         }
 
         public void EventTrans()
@@ -390,12 +401,83 @@ namespace _20171119Concurrent
                 });
         }
 
-        private void btn_n9_Click(object sender, RoutedEventArgs e)
+        private async void btn_n9_Click(object sender, RoutedEventArgs e)
         {
-            Observable.Interval(TimeSpan.FromSeconds(1))
-                .Buffer(2)
-                .Subscribe(x => Trace.WriteLine(DateTime.Now.Second + ": Got " + x[0] + " and " + x[1]));
+            //Observable.Interval(TimeSpan.FromSeconds(1))
+            //    .Buffer(2)
+            //    .Subscribe(x => Trace.WriteLine(DateTime.Now.Second + ": Got " + x[0] + " and " + x[1]));
+            int a11 = await ModifyValueCurrentlyAsync1();
+            Trace.WriteLine(a11);
         }
+
+        async Task<int> ModifyValueCurrentlyAsync()
+        {
+            var data = new SharedData();
+            var task1 = ModifyValueAsync(data);
+            var task2 = ModifyValueAsync(data);
+            var task3 = ModifyValueAsync(data);
+            await Task.WhenAll(task1, task2, task3);
+            return data.Value;
+        }
+
+        async Task<int> ModifyValueCurrentlyAsync1()
+        {
+            int val = 0;
+            var task1 = Task.Run(() => { val = val + 1; });
+            var task2 = Task.Run(() => { val = val + 1; });
+            var task3 = Task.Run(() => { val = val + 1; });
+            await Task.WhenAll(task1, task2, task3);
+            return val;
+        }
+
+        async Task ModifyValueAsync(SharedData data)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            data.Value = data.Value + 1;
+        }
+    }
+
+    class MyClass
+    {
+        private readonly object _mutex = new object();
+
+        private int _value;
+
+        public void Increment()
+        {
+            lock(_mutex)
+            {
+                _value = _value + 1;
+            }
+        }
+    }
+
+    class MyClass1
+    {
+        private readonly SemaphoreSlim _sslim = new SemaphoreSlim(1);
+
+        private int _value;
+
+        public async Task DelayAndIncrementAsync()
+        {
+            await _sslim.WaitAsync();
+            try
+            {
+                var oldValue = _value;
+                await Task.Delay(TimeSpan.FromSeconds(oldValue));
+                oldValue = +oldValue;
+            }
+            finally
+            {
+                _sslim.Release();
+            }
+        }
+
+    }
+
+    class SharedData
+    {
+        public int Value { get; set; }
     }
 
     sealed class MyAsyncCommand : ICommand
@@ -539,6 +621,17 @@ namespace _20171119Concurrent
             block.Post(2);
         }
 
+        async Task MyMethodAsync()
+        {
+            int val = 10;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            val += 1;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            val = val - 1;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            Trace.WriteLine(val);
+        }
+
         private void ImmuteList()
         {
             var stack = ImmutableStack<int>.Empty;
@@ -676,6 +769,42 @@ namespace _20171119Concurrent
 
     public class MyEventArgs : EventArgs
     {
+        private readonly DeferralManager _deferals = new DeferralManager();
 
+        public IDisposable GetDeferral()
+        {
+            return _deferals.GetDeferral();
+        }
+
+        internal Task WaitForDefferalAsync()
+        {
+            return _deferals.SignalAndWaitAsync();
+        }
     }
+
+    public class TestMyEventArgs
+    {
+        public event EventHandler<MyEventArgs> MyEvent;
+
+        private Task RaiseMyEventAsync()
+        {
+            var handler = MyEvent;
+            if (handler == null)
+                return Task.FromResult(0);
+
+            var args = new MyEventArgs();
+            handler(this, args);
+            return args.WaitForDefferalAsync();
+        }
+
+        async void AsyncHandler(object sender, MyEventArgs args)
+        {
+            using (args.GetDeferral())
+            {
+                await Task.Delay(TimeSpan.FromSeconds(2));
+            }
+        }
+    }
+
+    
 }
